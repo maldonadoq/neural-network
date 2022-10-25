@@ -2,7 +2,7 @@ from src.model import Model
 from src.activation import CrossEntropy, ReLU, Softmax
 from src.optimizer import SGDOptimizer
 from src.trainer import Trainer
-from src.utils import plot_history, predict
+from src.utils import predictTwo
 
 from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import train_test_split
@@ -50,9 +50,9 @@ opt = SGDOptimizer(model, lr=1e-3)
 trainer = Trainer(model, opt, CrossEntropy())
 history = trainer.train(5000, train_loader, val_loader)
 
-Ytrain_real, Ytrain_pred = predict(model, train_loader)
-Yval_real, Yval_pred = predict(model, val_loader)
-Ytest_real, Ytest_pred = predict(model, test_loader)
+Ytrain_real, Ytrain_pred = predictTwo(model, train_loader)
+Yval_real, Yval_pred = predictTwo(model, val_loader)
+Ytest_real, Ytest_pred = predictTwo(model, test_loader)
 
 print("train acc balanced:", balanced_accuracy_score(Ytrain_real, Ytrain_pred))
 print("val acc balanced:", balanced_accuracy_score(Yval_real, Yval_pred))

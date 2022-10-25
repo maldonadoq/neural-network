@@ -21,7 +21,18 @@ def plot_history(history):
     plt.show()
 
 
-def predict(model, loader):
+def predictOne(model, loader):
+    Y_pred = []
+    for X in loader:
+        X = X.numpy()
+        pred = model.forward(X)
+
+        Y_pred += np.argmax(pred, axis=1).tolist()
+
+    return Y_pred
+
+
+def predictTwo(model, loader):
     Y_real = []
     Y_pred = []
     for batch in loader:
